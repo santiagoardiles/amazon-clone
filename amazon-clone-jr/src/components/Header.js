@@ -1,8 +1,12 @@
-import React from "react";
-import "./Header.css";
+/*    Header.js    */
 
+// Setup.
+import React from "react";
+
+// Styles.
 import SearchIcon from "@material-ui/icons/Search";
 import { ShoppingBasket } from "@material-ui/icons";
+import "../styles/Header.css";
 
 function Header() {
   return (
