@@ -1,7 +1,11 @@
-import { ShoppingBasket } from "@material-ui/icons";
+/* Subtotal. */
+
+// Setup.
 import React from "react";
-import "../styles/Subtotal.css";
 import CurrencyFormat from "react-currency-format";
+
+// Styles.
+import "../styles/Subtotal.css";
 
 function Subtotal() {
   return (
