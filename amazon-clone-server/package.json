@@ -1,5 +1,5 @@
 {
-  "name": "amazon-clone-jr",
+  "name": "amazon-clone-server",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -10,8 +10,6 @@ import "../styles/Product.css";
 function Product({ id, title, image, price, rating }) {
   const [{ basket }, dispatch] = useStateValue();
 
-  console.log("Yo! this is the basket.", basket);
-
   const addToBasket = () => {
     // Dispatchs the item into the `Data Layer`.
     dispatch({

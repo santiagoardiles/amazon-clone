@@ -1,6 +1,11 @@
+/* Checkout. */
+
+// Setup.
 import React from "react";
-import "../styles/Checkout.css";
 import Subtotal from "./Subtotal";
+
+// Styles.
+import "../styles/Checkout.css";
 
 function Checkout() {
   return (
