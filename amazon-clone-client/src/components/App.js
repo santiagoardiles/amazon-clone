@@ -1,28 +1,48 @@
-/*    App.js    */
+/* App.js */
 
 // Setup.
+import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { useStateValue } from "../StateProvider";
+import { auth } from "../firebase";
+
+// Components.
 import Header from "./Header";
 import Home from "./Home";
 import Checkout from "./Checkout";
-import { BrowserRouter as Router, Switch } from "react-router-dom";
+import Login from "./Login";
 
 // Styles.
 import "../styles/App.css";
 
 function App() {
+  useEffect(() => {
+    auth.onAuthStateChanged((authUser) => {
+      console.log("USER IS", authUser);
+
+      if (authUser) {
+      } else {
+      }
+    });
+  }, []);
+
   return (
     <Router>
-      <div className="App">
-        <Header />
-
+      <div className="app">
         <Switch>
-          <Router path="/checkout">
-            <Checkout />
-          </Router>
+          <Route path="/login">
+            <Login />
+          </Route>
 
-          <Router path="/">
+          <Route path="/checkout">
+            <Header />
+            <Checkout />
+          </Route>
+
+          <Route path="/">
+            <Header />
             <Home />
-          </Router>
+          </Route>
         </Switch>
       </div>
     </Router>
