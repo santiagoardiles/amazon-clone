@@ -1,4 +1,4 @@
-/* App.js */
+/*    App.js    */
 
 // Setup.
 import React, { useState, useEffect } from "react";
@@ -16,12 +16,22 @@ import Login from "./Login";
 import "../styles/App.css";
 
 function App() {
+  const [{}, dispatch] = useStateValue();
+
   useEffect(() => {
     auth.onAuthStateChanged((authUser) => {
       console.log("USER IS", authUser);
 
       if (authUser) {
+        dispatch({
+          type: "SET_USER",
+          user: authUser,
+        });
       } else {
+        dispatch({
+          type: "SET_USER",
+          user: null,
+        });
       }
     });
   }, []);

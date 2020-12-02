@@ -1,9 +1,12 @@
+/*    reducer.js    */
+
+// Initial state.
 export const initialState = {
   basket: [],
   user: null,
 };
 
-// Selector.
+// Selector. Calculates the final price of the basket.
 export const getBasketTotal = (basket) =>
   basket?.reduce((amount, item) => item.price + amount, 0);
 
@@ -31,6 +34,9 @@ const reducer = (state, action) => {
       }
 
       return { ...state, basket: newBasket };
+
+    case "SET_USER":
+      return { ...state, user: action.user };
 
     default:
       return state;
