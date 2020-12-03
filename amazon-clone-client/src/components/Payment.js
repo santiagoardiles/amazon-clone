@@ -21,7 +21,7 @@ function Payment() {
 
   // Hooks.
   const [error, setError] = useState(null);
-  const [disabled, setDisabled] = useState(null);
+  const [disabled, setDisabled] = useState(true);
   const [succeeded, setSucceeded] = useState(false);
   const [processing, setProcessing] = useState(false);
   const [clientSecret, setClientSecret] = useState(true);
@@ -32,7 +32,7 @@ function Payment() {
 
   // componentDidUpdate.
   useEffect(() => {
-    const getClientSecrect = async () => {
+    const getClientSecret = async () => {
       const response = await axios({
         method: "post",
         url: `/payments/create?total=${getBasketTotal(basket) * 100}`,
@@ -41,15 +41,17 @@ function Payment() {
       setClientSecret(response.data.clientSecret);
     };
 
-    getClientSecrect();
+    getClientSecret();
   }, [basket]);
+
+  console.log("The secret is -->", clientSecret);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setProcessing(true);
 
     const payload = await stripe
-      .comfirmCardPayment(clientSecret, {
+      .confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
         },
