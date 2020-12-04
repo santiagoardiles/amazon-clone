@@ -8,6 +8,7 @@ import { getBasketTotal } from "../reducer";
 import CurrencyFormat from "react-currency-format";
 import axios from "../axios";
 import CheckoutProduct from "./CheckoutProduct";
+import { db } from "../firebase";
 
 // Stripe.
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
@@ -58,9 +59,24 @@ function Payment() {
       })
       .then(({ paymentIntent }) => {
         // `paymentIntent` is the payment confirmation.
+
+        db.collection("user")
+          .doc(user?.id)
+          .collection("orders")
+          .doc(paymentIntent.id)
+          .set({
+            basket: basket,
+            amount: paymentIntent.amount,
+            created: paymentIntent.created,
+          });
+
         setSucceeded(true);
         setError(null);
         setProcessing(false);
+
+        dispatch({
+          type: "EMPTY_BASKET",
+        });
 
         history.replace("/orders");
       });
